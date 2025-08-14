@@ -1,0 +1,17 @@
+{
+  "name": "pgats-02-modulo-7-api",
+  "version": "1.0.0",
+  "description": "Esta API permite login, registro de usuários, consulta de usuários e transferência de valores, com regras básicas de negócio. O banco de dados é em memória.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
