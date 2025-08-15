@@ -15,10 +15,8 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20.x'
       - name: Instalar dependências
         run: npm install
-      - name: Corrigir permissão do Mocha
-        run: chmod +x ./node_modules/.bin/mocha
-      - name: Executar testes
+      - name: Run tests
         run: npm test
