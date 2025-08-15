@@ -4,8 +4,8 @@
   "description": "Esta API permite login, registro de usuários, consulta de usuários e transferência de valores, com regras básicas de negócio. O banco de dados é em memória.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test/**/*.test.js --timeout 1000",
-    "start": "node server.js"
+  "test": "npx mocha test/**/*.test.js --timeout 1000",
+  "start": "node server.js"
   },
   "keywords": [],
   "author": "",
