@@ -21,4 +21,13 @@ jobs:
       - name: Corrigir permissão do Mocha
         run: chmod +x ./node_modules/.bin/mocha
       - name: Run tests
-        run: npm test
+        run: npm test-controller
+
+      - name: Subir a API
+        run: npm start &
+
+      - name: Esperar a API rodar
+        run: sleep 5
+
+      - name: Rodar os testes de API via HTTP
+        run: npm run test-external
