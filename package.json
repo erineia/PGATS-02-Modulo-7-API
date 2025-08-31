@@ -6,7 +6,8 @@
   "scripts": {
   "test": "npx mocha test/**/*.test.js --timeout 1000",
   "test-external": "npx mocha test/external/**/*.test.js --timeout 1000",
-  "test-controller": "npx mocha test/controller/**/*.test.js --timeout 1000",
+  "test-controller": "npx mocha test/controller/*.test.js --timeout 1000",
+
   "start": "node server.js"
   },
   "keywords": [],
