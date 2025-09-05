@@ -4,9 +4,9 @@
   "description": "Esta API permite login, registro de usuários, consulta de usuários e transferência de valores, com regras básicas de negócio. O banco de dados é em memória.",
   "main": "app.js",
   "scripts": {
-    "test": "npx mocha test/**/*.test.js --timeout 1000",
-    "test-external": "npx mocha test/external/**/*.test.js --timeout 1000",
-    "test-controller": "npx mocha test/controller/*.test.js --timeout 1000",
+    "test": "npx mocha test/**/*.test.js --timeout 1000 --reporter mochawesome",
+    "test-external": "npx mocha test/external/**/*.test.js --timeout 1000 --reporter mochawesome",
+    "test-controller": "npx mocha test/controller/*.test.js --timeout 1000 --reporter mochawesome",
     "start": "node server.js"
   },
   "keywords": [],
@@ -20,5 +20,8 @@
     "sinon": "^21.0.0",
     "supertest": "^7.1.4",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "mochawesome": "^7.1.3"
   }
 }
