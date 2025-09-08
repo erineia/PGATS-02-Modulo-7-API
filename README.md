@@ -43,4 +43,30 @@ Para testar a API com Supertest, importe o `app.js` em seu arquivo de teste.
 
 ---
 
+# API GraphQL
+
+Esta API expõe os serviços via GraphQL usando ApolloServer.
+
+## Como executar
+
+```bash
+npm install
+node graphql/server.js
+```
+
+Acesse o playground em: [http://localhost:4000/graphql](http://localhost:4000/graphql)
+
+## Autenticação
+
+- Para Mutations de transferência, inclua o JWT no header:
+  ```
+  Authorization: Bearer <token>
+  ```
+- O token é obtido via Mutation `login`.
+
+## Estrutura
+
+- Código GraphQL está na pasta `graphql/`
+- Para testes, importe `graphql/app.js` no Supertest.
+
 API criada para fins educacionais de automação de testes.

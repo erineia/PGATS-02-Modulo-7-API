@@ -7,14 +7,18 @@
     "test": "npx mocha test/**/*.test.js --timeout 1000 --reporter mochawesome",
     "test-external": "npx mocha test/external/**/*.test.js --timeout 1000 --reporter mochawesome",
     "test-controller": "npx mocha test/controller/*.test.js --timeout 1000 --reporter mochawesome",
-    "start": "node server.js"
+    "start": "node server.js",
+    "start-graphql": "node graphql/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-express": "^3.13.0",
     "chai": "^5.2.1",
-    "express": "^5.1.0",
+    "dotenv": "^17.2.2",
+    "express": "^4.21.2",
+    "graphql": "^16.11.0",
     "jsonwebtoken": "^9.0.2",
     "mocha": "^11.7.1",
     "sinon": "^21.0.0",
