@@ -6,6 +6,13 @@ function transfer({ from, to, amount }) {
   const recipient = users.find((u) => u.username === to);
   if (!sender || !recipient)
     throw new Error('Usuário remetente ou destinatário não encontrado');
+
+  // Adicione esta verificação:
+  if (sender.amount < amount) {
+    console.log('Lançando erro de saldo insuficiente');
+    throw new Error('Saldo insuficiente para transferência');
+  }
+
   const isFavorecido = sender.favorecidos && sender.favorecidos.includes(to);
   if (!isFavorecido && amount >= 5000) {
     throw new Error(
@@ -14,6 +21,8 @@ function transfer({ from, to, amount }) {
   }
   const transferObj = { from, to, amount, date: new Date() };
   transfers.push(transferObj);
+  sender.amount -= amount;
+  recipient.amount += amount;
   return transferObj;
 }
 
