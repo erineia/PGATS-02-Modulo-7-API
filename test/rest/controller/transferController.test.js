@@ -76,7 +76,7 @@ describe('Transfer Controller', () => {
 
       expect(resposta.status).to.equal(201);
 
-      const respostaEsperada = require('../../fixture/respostas/Quando informo valores válidos eu tenho sucesso com 201 CREATED.json');
+      const respostaEsperada = require('../fixture/respostas/Quando informo valores válidos eu tenho sucesso com 201 CREATED.json');
       delete resposta.body.date;
       delete respostaEsperada.date;
       expect(resposta.body).to.deep.equal(respostaEsperada);
