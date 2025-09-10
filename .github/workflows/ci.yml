@@ -19,9 +19,8 @@ jobs:
       - name: Instalar dependências
         run: npm install --legacy-peer-deps
 
-      # AQUI é onde sua pipeline original falhou
       - name: Rodar os testes de API via Controller
-        run: npm run test-rest-controller
+        run: npx mocha test/rest/controller/**/*.test.js --timeout 10000 --reporter mochawesome
 
       - name: Instalar start-server-and-test
         run: npm install start-server-and-test
