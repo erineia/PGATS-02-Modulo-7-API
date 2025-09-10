@@ -26,10 +26,9 @@ module.exports = {
       });
       return { token, user };
     },
-    createTransfer: async (_, { from, to, value }, { user }) => {
-      // Se quiser autenticação, verifique se user existe
+    createTransfer: async (_, { from, to, amount }, { user }) => {
       if (!user) throw new Error('Autenticação obrigatória');
-      return await transferService.transfer({ from, to, amount: value });
+      return await transferService.transfer({ from, to, amount });
     },
   },
 };

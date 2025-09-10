@@ -10,7 +10,7 @@ const typeDefs = gql`
   type Transfer {
     from: String!
     to: String!
-    amount: Float!
+    amount: Float
     date: String!
   }
 
@@ -31,7 +31,7 @@ const typeDefs = gql`
       favorecidos: [String!]
     ): User!
     loginUser(username: String!, password: String!): AuthPayload!
-    createTransfer(from: String!, to: String!, value: Float!): Transfer!
+    createTransfer(from: String!, to: String!, amount: Float!): Transfer
   }
 `;
 

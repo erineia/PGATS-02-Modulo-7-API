@@ -18,20 +18,21 @@ jobs:
           node-version: '20.x'
       - name: Instalar dependências
         run: npm install
-      - name: Corrigir permissão do Mocha
-        run: chmod +x ./node_modules/.bin/mocha
 
-      - name: Subir API REST
-        run: npm start &
+      - name: Rodar os testes de API via Controller
+        run: npm run test-rest-controller
+
+      - name: Subir API Rest
+        run: npm start-rest &
 
       - name: Subir API GraphQL
-        run: node graphql/server.js &
+        run: npm run start-graphql &
 
-      - name: Esperar ambas APIs rodarem
-        run: npx wait-on --timeout=30000 http://localhost:3000 http://localhost:4000/graphql
+      - name: Esperar as APIs estarem Funcionando
+        run: sleep 8
 
-      - name: Rodar os testes de API REST
-        run: npm run test-external
+      - name: Rodar os testes External de API Rest via HTTP
+        run: npm run test-rest-external
 
-      - name: Rodar os testes de GraphQL
-        run: npm test
+      - name: Rodar os testes External de API GraphQL via HTTP
+        run: npm run test-graphql-external

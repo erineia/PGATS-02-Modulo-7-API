@@ -4,10 +4,12 @@
   "description": "Esta API permite login, registro de usuários, consulta de usuários e transferência de valores, com regras básicas de negócio. O banco de dados é em memória.",
   "main": "app.js",
   "scripts": {
-    "test": "npx mocha test/**/*.test.js --timeout 1000 --reporter mochawesome",
-    "test-external": "npx mocha test/external/**/*.test.js --timeout 1000 --reporter mochawesome",
-    "test-controller": "npx mocha test/controller/*.test.js --timeout 1000 --reporter mochawesome",
-    "start": "node server.js",
+    "test": "mocha test/**/*.test.js --timeout 10000 --reporter mochawesome",
+    "test-rest-external": "mocha test/rest/external/**/*.test.js --timeout 10000 --reporter mochawesome",
+    "test-rest-controller": "mocha test/rest/controller/**/*.test.js --timeout 10000 --reporter mochawesome",
+    "test-graphql-external": "mocha test/graphql/external/**/*.test.js --timeout 10000 --reporter mochawesome",
+    "test-graphql-controller": "mocha test/graphql/controller/**/*.test.js --timeout 10000 --reporter mochawesome",
+    "start-rest": "node server.js",
     "start-graphql": "node graphql/server.js"
   },
   "keywords": [],
@@ -26,6 +28,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "chai-exclude": "^2.1.1",
     "mochawesome": "^7.1.3"
   }
 }

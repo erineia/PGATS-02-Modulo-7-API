@@ -1,0 +1,10 @@
+{
+  "data": {
+    "createTransfer": {
+      "date": "2025-09-09T20:37:20.388Z",
+      "from": "Neia",
+      "to": "Maria",
+      "amount": 10.1
+    }
+  }
+}
