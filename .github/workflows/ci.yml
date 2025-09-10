@@ -10,12 +10,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout código
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Instalar Node.js
+
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
+
       - name: Instalar dependências
         run: npm install --legacy-peer-deps
 
@@ -23,18 +25,24 @@ jobs:
         run: chmod +x ./node_modules/.bin/mocha
 
       - name: Rodar os testes de API via Controller
-        run: npx mocha test/rest/controller/**/*.test.js --timeout 10000 --reporter mochawesome
+        run: npm run test-rest-controller
 
-      - name: Instalar start-server-and-test
-        run: npm install start-server-and-test
+      - name: Subir a API Rest
+        run: npm run start-rest &
 
-      - name: Criar .env para os testes
+      - name: Subir a API GraphQL
+        run: npm run start-graphql &
+
+      - name: Esperar as APIs estarem Funcionando
+        run: sleep 8
+
+      - name: Criar .env
         run: |
           echo "BASE_URL_REST=${{ secrets.BASE_URL_REST }}" >> .env
           echo "BASE_URL_GRAPHQL=${{ secrets.BASE_URL_GRAPHQL }}" >> .env
 
       - name: Rodar os testes External de API Rest via HTTP
-        run: npx start-server-and-test 'npm run start-rest' 'http://localhost:3000' 'npm run test-rest-external'
+        run: npm run test-rest-external
 
       - name: Rodar os testes External de API GraphQL via HTTP
-        run: npx start-server-and-test 'npm run start-graphql' 'http://localhost:4000/graphql' 'npm run test-graphql-external'
+        run: npm run test-graphql-external
