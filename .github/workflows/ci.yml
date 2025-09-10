@@ -2,40 +2,37 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: ['master']
   pull_request:
-    branches: [master]
+    branches: ['master']
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout código
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Instalar Node.js
+
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-      - name: Instalar dependências
-        run: npm install --legacy-peer-deps
 
-      - name: Corrigir permissão do Mocha
-        run: chmod +x ./node_modules/.bin/mocha
+      - name: Install dependencies
+        run: npm install
 
       - name: Rodar os testes de API via Controller
         run: npm run test-rest-controller
 
-      - name: Finalizar processos node antigos
-        run: pkill -f node || true
+      - name: Subir a API Rest
+        run: npm run start-rest &
 
-      - name: Subir API Rest
-        run: npm start-rest &
-
-      - name: Subir API GraphQL
+      - name: Subir a API GraphQL
         run: npm run start-graphql &
 
-      - name: Esperar API REST estar pronta
-        run: npx wait-on --timeout=60000 http://localhost:3000
+      - name: Esperar as APIs estarem Funcionando
+        run: sleep 8
 
       - name: Rodar os testes External de API Rest via HTTP
         run: npm run test-rest-external
