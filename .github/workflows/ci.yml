@@ -25,6 +25,9 @@ jobs:
       - name: Rodar os testes de API via Controller
         run: npm run test-rest-controller
 
+      - name: Finalizar processos node antigos
+        run: pkill -f node || true
+
       - name: Subir API Rest
         run: npm start-rest &
 
