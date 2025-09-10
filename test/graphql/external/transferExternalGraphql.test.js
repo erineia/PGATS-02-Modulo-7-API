@@ -14,9 +14,12 @@ describe('Mutation: Transferencias', () => {
     token = respostaLogin.body.data.loginUser.token;
   });
 
+  beforeEach(() => {
+    createTransfer = require('../fixture/requisicoes/transferencia/createTransfer.json');
+  });
+
   it('a) Transferência com sucesso', async () => {
     const respostaEsperada = require('../fixture/respostas/transferencia/validarTransferenciaComSucesso.json');
-    const createTransfer = require('../fixture/requisicoes/transferencia/createTransfer.json');
 
     const res = await request(process.env.BASE_URL_GRAPHQL)
       .post('')
@@ -29,27 +32,27 @@ describe('Mutation: Transferencias', () => {
       .to.deep.equal(respostaEsperada.data.createTransfer);
   });
 
-  it('b) Sem saldo disponível para transferência', async () => {
-    const createTransfer = require('../fixture/requisicoes/transferencia/createTransfer.json');
-    createTransfer.variables.amount = 5000;
-    const res = await request(process.env.BASE_URL_GRAPHQL)
-      .post('')
-      .set('Authorization', `Bearer ${token}`)
-      .send(createTransfer);
-
-    expect(res.status).to.equal(200);
-    expect(res.body.errors[0].message).to.equal(
-      'Saldo insuficiente para transferência',
-    );
-  });
-
   it('c) Token de autenticação não informado', async () => {
-    const createTransfer = require('../fixture/requisicoes/transferencia/createTransfer.json');
     const res = await request(process.env.BASE_URL_GRAPHQL)
       .post('')
       .send(createTransfer);
 
     expect(res.status).to.equal(200);
     expect(res.body.errors[0].message).to.equal('Autenticação obrigatória');
+  });
+
+  const testesDeErrosDeNegocio = require('../fixture/requisicoes/transferencia/createTransferWithError.json');
+  testesDeErrosDeNegocio.forEach((teste) => {
+    it(`Testando a regra relacionada a ${teste.nomeDoTeste}`, async () => {
+      const respostaTransferencia = await request(process.env.BASE_URL_GRAPHQL)
+        .post('')
+        .set('Authorization', `Bearer ${token}`)
+        .send(teste.createTransfer);
+
+      expect(respostaTransferencia.status).to.equal(200);
+      expect(respostaTransferencia.body.errors[0].message).to.equal(
+        teste.mensagemEsperada,
+      );
+    });
   });
 });

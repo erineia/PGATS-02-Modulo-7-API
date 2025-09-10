@@ -1,0 +1,39 @@
+[
+    {
+        "nomeDoTeste": "Saldo insuficiente",
+        "createTransfer": {
+            "query": "mutation Mutation($from: String!, $to: String!, $amount: Float!) {createTransfer(from: $from, to: $to, amount: $amount) {date from to amount}}",
+            "variables": {
+                "from": "Neia",
+                "to": "Maria",
+                "amount": 5000
+            }
+        },
+        "mensagemEsperada": "Saldo insuficiente para transferência"
+    },
+    {
+        "nomeDoTeste": "Remetente não encontrado",
+        "createTransfer": {
+            "query": "mutation Mutation($from: String!, $to: String!, $amount: Float!) {createTransfer(from: $from, to: $to, amount: $amount) {date from to amount}}",
+            "variables": {
+                "from": "Neia",
+                "to": "Jose",
+                "amount": 15
+            }
+        },
+        "mensagemEsperada": "Usuário remetente ou destinatário não encontrado"
+    }
+    ,
+    {
+        "nomeDoTeste": "Destinatário não encontrado",
+        "createTransfer": {
+            "query": "mutation Mutation($from: String!, $to: String!, $amount: Float!) {createTransfer(from: $from, to: $to, amount: $amount) {date from to amount}}",
+            "variables": {
+                "from": "Jose",
+                "to": "Neia",
+                "amount": 15
+            }
+        },
+        "mensagemEsperada": "Usuário remetente ou destinatário não encontrado"
+    }
+]
