@@ -35,7 +35,7 @@ jobs:
         run: npm run start-graphql &
 
       - name: Esperar API REST estar pronta
-        run: sleep 8
+        run: npx wait-on --timeout=60000 http://localhost:3000
 
       - name: Rodar os testes External de API Rest via HTTP
         run: npm run test-rest-external
