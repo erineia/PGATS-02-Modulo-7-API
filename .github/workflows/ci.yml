@@ -19,6 +19,9 @@ jobs:
       - name: Instalar dependências
         run: npm install --legacy-peer-deps
 
+      - name: Corrigir permissão do Mocha
+        run: chmod +x ./node_modules/.bin/mocha
+
       - name: Rodar os testes de API via Controller
         run: npm run test-rest-controller
 
